@@ -12,6 +12,10 @@ Modifications made by [Feng11z&&lanyu-cn] in 2025.
 需要提前配置好python运行环境
 并已安装selenium插件
 
+'''安装依赖
+pip install selenium
+'''
+
 需要测试版的chrome浏览器以提供支持->修改为edge，但是需要在 Microsoft Edge WebDriver 下载页面 [https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/] 下载对应的edge版本的WebDriver
 
 ### 使用教程

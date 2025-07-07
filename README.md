@@ -4,41 +4,24 @@ Modifications made by [Realcyc0916] in 2025.
 Modifications made by [Feng11z&&lanyu-cn] in 2025.
 
 
-## antiewt360
-升学e网通自动化刷课脚本
+# 升学e网通自动化脚本
 
-### 使用环境
+这是一个用于在 [升学e网通](https://teacher.ewt360.com/) 平台上自动执行学习任务的 Selenium 脚本。
 
-需要提前配置好python运行环境
-并已安装selenium插件
+## 🧰 功能简介
 
-'''安装依赖
+- 自动登录账户
+- 模拟点击操作以完成课程视频播放
+- 获取学习进度信息
+- 支持 Microsoft Edge 浏览器
+
+## ⚙️ 环境依赖
+
+- Python 3.x
+- Selenium
+- Microsoft Edge 浏览器
+- Microsoft Edge WebDriver ([msedgedriver.exe](file://c:\Users\Zx\Desktop\gk\msedgedriver.exe))
+
+安装依赖包：
+```bash
 pip install selenium
-'''
-
-需要测试版的chrome浏览器以提供支持->修改为edge，但是需要在 Microsoft Edge WebDriver 下载页面 [https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/] 下载对应的edge版本的WebDriver
-
-### 使用教程
-
-在代码中找到如下片段
-```python
-USER = "username"
-PASS = "userpassword"
-```
-将其修改为自己ewt账号的账号和密码
-
-找到
-```python
-service = EdgeService(executable_path="c:\\msedgedriver.exe")
-```
-将```c:\\msedgedriver.exe```修改为你的Chrome文件地址
-
-运行即可
-
-### 注意事项
-
-如果学校在“我的假期”中有提供多个选项, 请在程序启动后尽快选择需要的那一个
-
-如果学校在网课平台中有提供试卷提交
-请先提交完所有的作业再运行此程序
-

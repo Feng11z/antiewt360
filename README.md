@@ -20,7 +20,7 @@ Modifications made by [Feng11z&&lanyu-cn] in 2025.
 - Python 3.x
 - Selenium
 - Microsoft Edge 浏览器
-- Microsoft Edge WebDriver ([msedgedriver.exe](file://c:\Users\Zx\Desktop\gk\msedgedriver.exe))
+- Microsoft Edge WebDriver ([msedgedriver.exe](file://c:\Users\Zx\Desktop\gk\msedgedriver.exe))[下载地址]([https://teacher.ewt360.com/](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/))
 
 安装依赖包：
 ```bash

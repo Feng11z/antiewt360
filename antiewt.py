@@ -8,12 +8,13 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
-
+from selenium.webdriver.edge.service import Service as EdgeService
+from selenium.webdriver.edge.options import Options as EdgeOptions
 
 #输入用户的账户名称和密码
 
 USER = "username"
-PASS = "userpassword"
+PASS = "key"
 
 
 def switch_to_new_window(driver):
@@ -49,8 +50,13 @@ def login(driver):
 
 def navigate_to_vacation(driver):
     """点击‘我的假期’后关闭当前窗口，并切换到新窗口"""
-    vacation_link = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.LINK_TEXT, "我的假期"))
+    logging.info(f"当前页面标题: {driver.title}")
+    body_text = driver.find_element(By.TAG_NAME, 'body').text
+    logging.info(f"页面部分内容:\n{body_text[:500]}...")
+
+    # 使用 XPath 查找包含“我的假期”的元素并可点击
+    vacation_link = WebDriverWait(driver, 30).until(
+        EC.element_to_be_clickable((By.XPATH, "//*[contains(text(), '我的假期')]"))
     )
     vacation_link.click()
     driver.close()
@@ -152,11 +158,10 @@ def main():
         format="[%(asctime)s] %(filename)s(line:%(lineno)d) - %(levelname)s: %(message)s",
         level=logging.INFO, datefmt="%Y/%m/%d %H:%M:%S"
     )
-    logging.info("正在启动Chrome...")
-    chrome_options = Options()
-    # 指定 Chrome 可执行文件的完整路径
-    chrome_options.binary_location = "C:/example.exe"
-    driver = webdriver.Chrome(options=chrome_options)
+    logging.info("正在启动Edge...")
+    edge_options = EdgeOptions()
+    service = EdgeService(executable_path="c:\\msedgedriver.exe")
+    driver = webdriver.Edge(service=service, options=edge_options)
     driver.maximize_window()
     action_chains = ActionChains(driver)
     
@@ -165,13 +170,11 @@ def main():
     driver.implicitly_wait(10)
 
     login(driver)
-    navigate_to_vacation(driver)
-    time.sleep(5)  # 等待新页面加载
-    click_primary_button(driver)
+    # navigate_to_vacation(driver)
     logging.info("获取总完成度...")
-    time.sleep(10)  # 可考虑进一步用WebDriverWait优化
+    time.sleep(10)  # 可考虑进一步用WebDriverWait优化，but懒
     progress = get_all_progress(driver)
-    sProgress = progress.split("/")
+    sProgress = progress.split("/") if progress else ["0", "0"]
     if sProgress[0] == sProgress[1]:
         logging.info("所有课程已完成,按下回车退出")
         input()
